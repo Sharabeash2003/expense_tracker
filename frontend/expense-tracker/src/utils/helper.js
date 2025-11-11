@@ -9,7 +9,7 @@ export const getInitials = (name) => {
     const words = name.split(" ");
     let initials = "";
 
-    for (let i = 0; i < Math.min(words.lenght, 2); i++) {
+    for (let i = 0; i < Math.min(words.length, 2); i++) {
         initials += words[i][0];
     }
 
@@ -21,9 +21,18 @@ export const addThousandsSeparator = (num) => {
     if (num == null || isNaN(num)) return "";
 
     const [integerPart, fractionalPart] = num.toString().split(".");
-    const formattedInteger = integerPart.replace(/\B(?=(d{3})+(?!\d))/g, ",");
+    const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
     return fractionalPart
         ? `${formattedInteger}.${fractionalPart}`
         : formattedInteger;
+};
+
+export const prepareExpenseBarChartData = (data = []) => {
+    const chartData = data.map((item) => ({
+        category: item?.category,
+        amount: item?.amount,    
+    }));
+
+    return chartData;
 };
